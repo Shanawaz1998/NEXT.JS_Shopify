@@ -1,8 +1,8 @@
-Installed libraries
+----------Installed libraries
 
 - mongoose
 
-Starting of the project
+-----------Starting of the project
 
 1- Created model
 2-
@@ -11,7 +11,9 @@ Starting of the project
 
 - While creating the model we can add one object { timestamps: true } to add 2 property of date and time when created and modified
 
-Difficulties in creating the project
+----------Difficulties in creating the project
 
 - Storing only date(Without timestamp) in the data base
 - Storing the current date of the system
+
+--------Pending work

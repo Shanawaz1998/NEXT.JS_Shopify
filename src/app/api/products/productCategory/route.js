@@ -1,18 +1,18 @@
 import { connectDB } from "@/helper/db";
-import { Product } from "@/models/products";
+import { ProductCategory } from "@/models/productCategory";
 import { NextResponse } from "next/server";
 
 await connectDB();
 
-//To Add products
+//To add the product categories
 export const POST = async (request) => {
   try {
     const data = await request.json();
-    const result = new Product(data);
+    const result = new ProductCategory(data);
     await result.save();
     console.log("Data", data);
     return NextResponse.json({
-      message: "Product Added",
+      message: "Product category added",
     });
   } catch (error) {
     console.log("Error", error);
@@ -22,11 +22,10 @@ export const POST = async (request) => {
   }
 };
 
-//To get all the products
-export const GET = async () => {
+//To get all the product categories
+export const GET = async (request) => {
   try {
-    const result = await Product.find();
-    console.log("Result", result);
+    const result = await ProductCategory.find();
     return NextResponse.json(result, {
       status: 201,
     });
