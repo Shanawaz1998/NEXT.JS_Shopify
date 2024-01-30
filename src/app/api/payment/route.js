@@ -1,14 +1,14 @@
-import { Orders } from "@/models/orders";
+import { Payment } from "@/models/payments";
 import { NextResponse } from "next/server";
 
-//To add the orders
-export const POST = async (request, { params }) => {
+//To add the new payment
+export const POST = async (request) => {
   try {
     const data = await request.json();
-    const result = new Orders(data);
-    await result.save();
-    console.log("Data", data);
-    return NextResponse.json(result, {
+    const newPayment = new Payment(data);
+    await newPayment.save();
+
+    return NextResponse.json(newPayment, {
       status: 201,
     });
   } catch (error) {
@@ -19,10 +19,11 @@ export const POST = async (request, { params }) => {
   }
 };
 
-//To get all the orders
+//To get all the payments
 export const GET = async () => {
   try {
-    const result = await Orders.find();
+    const result = await Payment.find();
+
     return NextResponse.json(result, {
       status: 201,
     });

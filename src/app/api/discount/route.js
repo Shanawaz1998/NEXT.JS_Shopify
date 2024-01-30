@@ -1,13 +1,21 @@
-import { Orders } from "@/models/orders";
+import { connectDB } from "@/helper/db";
+import { getCurrentDate } from "@/helper/utility";
+import { Discount } from "@/models/discount";
 import { NextResponse } from "next/server";
 
-//To add the orders
-export const POST = async (request, { params }) => {
+export const POST = async (request) => {
+  const currentDateTime = getCurrentDate();
   try {
     const data = await request.json();
-    const result = new Orders(data);
-    await result.save();
     console.log("Data", data);
+
+    (data.createdAt = currentDateTime),
+      (data.modifiedAt = ""),
+      (data.deletedAt = "");
+
+    const result = new Discount(data);
+    await result.save();
+
     return NextResponse.json(result, {
       status: 201,
     });
@@ -19,13 +27,12 @@ export const POST = async (request, { params }) => {
   }
 };
 
-//To get all the orders
+//To get all the discount
 export const GET = async () => {
   try {
-    const result = await Orders.find();
-    return NextResponse.json(result, {
-      status: 201,
-    });
+    const result = await Discount.find();
+
+    return NextResponse.json(result, { status: 201 });
   } catch (error) {
     console.log("Error", error);
     return NextResponse.json({

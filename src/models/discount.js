@@ -1,9 +1,5 @@
 import mongoose from "mongoose";
 
-const date = new Date().getTime();
-const offsetTime = new Date().getTimezoneOffset();
-const result = date - offsetTime * 60000;
-
 export const discountSchema = new mongoose.Schema({
   discountName: {
     type: String,
@@ -23,15 +19,12 @@ export const discountSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: result,
   },
   modifiedAt: {
     type: Date,
-    default: result,
   },
   deletedAt: {
     type: Date,
-    default: result,
   },
 });
 
